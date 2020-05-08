@@ -95,6 +95,21 @@ public class MazeTest {
         assertEquals("the number of exit points is incorrect :0",exception.getMessage());
     }
 
+    /*
+    1 1 3
+    0 0 2
+    1 0 0
+     */
+    @DisplayName("should get the entry point coordinate")
+    @Test
+    public void shouldGetEntryPointCoordinate() {
+        int[][] newMaze = {{1, 0, 0}, {0, 0, 2}, {1, 1, 3}};
+        Maze maze = new Maze(newMaze);
+        assertEquals(2,maze.getEntryPoint().getX());
+        assertEquals(1,maze.getEntryPoint().getY());
+
+    }
+
     private Maze getRandomMaze() {
         int[][] randomMaze = MazeTestHelper.createRandomMaze(15, 15);
         return new Maze(randomMaze);

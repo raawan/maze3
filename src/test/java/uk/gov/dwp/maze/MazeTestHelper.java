@@ -40,7 +40,7 @@ public class MazeTestHelper {
     }
 
     static void printMaze(int[][] maze) {
-        for (int i = 0; i < maze.length; i++) {
+        for (int i = maze.length - 1 ; i >= 0 ; i--) {
             for (int j = 0; j < maze[0].length; j++) {
                 System.out.printf(maze[i][j] + " ");
             }
