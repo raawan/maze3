@@ -12,6 +12,11 @@ public final class Location {
         this.coordinate = coordinate;
     }
 
+    public Location(final DIRECTION direction, final int x, final int y) {
+        this.direction = direction;
+        this.coordinate = new Coordinate(x, y);
+    }
+
     public DIRECTION getDirection() {
         return direction;
     }

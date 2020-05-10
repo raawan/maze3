@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -31,6 +32,7 @@ public class ExplorerLocationsRecordTest {
              0 1 2 3 4 5
     */
     @Test
+    @DisplayName("should record the locations of explorer where explorer move forward - test 1")
     public void shouldRecordLocationsOfExplorerWhereSheHasBeen_1() {
 
         //Given
@@ -63,6 +65,7 @@ public class ExplorerLocationsRecordTest {
              0 1 2 3 4 5
     */
     @Test
+    @DisplayName("should record the locations of explorer where explorer move forward - test 2")
     public void shouldRecordLocationsOfExplorerWhereSheHasBeen_2() {
 
         //Given

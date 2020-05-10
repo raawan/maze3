@@ -51,7 +51,7 @@ public class ExplorerMoveForwardTest {
             String direction, int currentLocationX, int currentLocationY,
             int expectedLocationX, int expectedLocationY) {
         //Given
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.valueOf(direction), new Coordinate(currentLocationX, currentLocationY)));
+        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.valueOf(direction), currentLocationX,currentLocationY));
 
         //When
         explorer.moveForward();
@@ -77,7 +77,7 @@ public class ExplorerMoveForwardTest {
     @DisplayName("should move forward if WALL is available in front of explorer")
     public void shouldNotMoveForwardIfWallIsAvailableInFrontOfExplorer() {
         //Given
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.N, new Coordinate(3, 2)));
+        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.N, 3,2));
 
         //When
         explorer.moveForward();
