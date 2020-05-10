@@ -1,11 +1,9 @@
-package uk.gov.dwp.maze;
+package uk.gov.dwp.explorer;
 
-//* Given a maze the explorer should be able to drop in to the Start point (facing north)
-//* An explorer on a maze must be able to move forward
-//* An explorer on a maze must be able to turn left and right (changing direction the explorer is facing)
-//* An explorer on a maze must be able to declare what is in front of them
-//* An explorer on a maze must be able to declare all movement options from their given location
-//* An explorer on a maze must be able to report a record of where they have been in an understandable fashion
+import uk.gov.dwp.common.Coordinate;
+import uk.gov.dwp.common.DIRECTION;
+import uk.gov.dwp.common.Location;
+import uk.gov.dwp.maze.Maze;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.stream.Collectors;
 public class Explorer {
 
     private final Maze maze;
-    private final int haveBeen[][];
+    private final List<Coordinate> haveBeen;
     private Location currentLocation;
 
     public Location getCurrentLocation() {
@@ -25,31 +23,42 @@ public class Explorer {
         return maze;
     }
 
+    public List<Coordinate> getHaveBeen() {
+        return haveBeen;
+    }
+
     public void setCurrentLocation(final Location currentLocation) {
+        //ToDo: throw excpetion if the location is WALL
         this.currentLocation = currentLocation;
     }
 
     public Explorer(final Maze maze) {
         this.maze = maze;
-        this.haveBeen = new int[maze.getMaze().length][maze.getMaze()[0].length];
         currentLocation = new Location(DIRECTION.N, maze.getEntryPoint());
+        this.haveBeen = new ArrayList<>();
+        haveBeen.add(currentLocation.getCoordinate());
     }
 
-    void moveForward() {
+
+    public void moveForward() {
         int x = currentLocation.getCoordinate().getX();
         int y = currentLocation.getCoordinate().getY();
         final List<Location> locations = availableLocationsToMove(x, y).stream()
                 .filter(location -> currentLocation.getDirection().equals(location.getDirection()))
                 .filter(location -> isValidMove(location.getCoordinate().getX(), location.getCoordinate().getY()))
                 .collect(Collectors.toList());
-        currentLocation = locations.get(0);
+        if (locations.size() > 0) {
+            currentLocation = locations.get(0);
+            haveBeen.add(currentLocation.getCoordinate());
+        }
     }
 
     /*
     This method determines only one step movement options instead of the whole path
     The assumption made here is that if its an exit point or a space next its a valid move
+    No diagonal movements are considered
      */
-    List<Location> availableMovementOptions() {
+    public List<Location> availableMovementOptions() {
         int x = currentLocation.getCoordinate().getX();
         int y = currentLocation.getCoordinate().getY();
 
@@ -63,7 +72,7 @@ public class Explorer {
     }
 
 
-    void turnLeft() {
+    public void turnLeft() {
         switch (currentLocation.getDirection()) {
             case N:
                 currentLocation = new Location(DIRECTION.W, currentLocation.getCoordinate());
@@ -80,7 +89,7 @@ public class Explorer {
         }
     }
 
-    void turnRight() {
+    public void turnRight() {
         switch (currentLocation.getDirection()) {
             case N:
                 currentLocation = new Location(DIRECTION.E, currentLocation.getCoordinate());
@@ -98,9 +107,9 @@ public class Explorer {
     }
 
     /*
-   This method will return -1 if the explorer is on border and facing away from Maze
+    This method will return -1 if the explorer is on border and facing away from Maze
    */
-    int inFrontOfMe() {
+    public int inFrontOfMe() {
         int x = currentLocation.getCoordinate().getX();
         int y = currentLocation.getCoordinate().getY();
 
@@ -146,10 +155,6 @@ public class Explorer {
         locations.add(new Location(DIRECTION.E, new Coordinate(x + 1, y))); // Move RIGHT
         locations.add(new Location(DIRECTION.W, new Coordinate(x - 1, y))); // Move LEFT
         return locations;
-    }
-
-    public void traverseMaze() {
-
     }
 
 }

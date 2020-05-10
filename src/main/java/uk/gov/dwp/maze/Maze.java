@@ -1,5 +1,7 @@
 package uk.gov.dwp.maze;
 
+import uk.gov.dwp.common.Coordinate;
+
 import java.util.Arrays;
 
 public class Maze {
@@ -9,18 +11,16 @@ public class Maze {
     public static final int ENTRY = 2;
     public static final int EXIT = 3;
 
-    //Assuming maze is of rectangular size and all values are either filled with 0,1,2 or 3
-    //0 for space ; 1 for wall ; 2 for entry point; 3 for exit
     final int maze[][];
 
-    Maze(final int maze[][]) {
+    public Maze(final int maze[][]) {
         validateLength(maze);
         validateNumberOfEntryPoint(maze);
         validateNumberOfExitPoint(maze);
         this.maze = maze;
     }
 
-    int[][] getMaze() {
+    public int[][] getMaze() {
         return maze;
     }
 
@@ -47,13 +47,7 @@ public class Maze {
                 .count();
     }
 
-    //ToDo: refactor
-    /*
-    1 1 3
-    0 0 2
-    1 0 0
-     */
-    Coordinate getEntryPoint() {
+    public Coordinate getEntryPoint() {
         int x = 0;
         int y = 0;
         out:
