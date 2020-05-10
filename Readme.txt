@@ -24,4 +24,7 @@ ASSUMPTIONS:
 
 5)  inFrontOfMe() method will return -1 if the explorer is on border and facing away from Maze
 
-5)  The code to solve the maze is not written, the intent was to acheive the acceptance criteria as mentioned in the requirement
+6)  The code to solve the maze is not written, the intent was to acheive the acceptance criteria as mentioned in the requirement
+
+7) I have provided a utility method called printMaze(), just in case if you want to see how a maze state looks like
+    {This is not used anywhere, so should be removed before moving to production}

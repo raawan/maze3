@@ -21,7 +21,7 @@ public class MazeTest {
     public void shouldThrowExceptionIfXcoordinateIsLessThanZero() {
         int[][] newMaze = {{2, 0, 0}, {0, 0, 0}, {1, 3, 0}};
         Maze maze = new Maze(newMaze);
-        Exception exception = assertThrows(RuntimeException.class, () -> maze.getValueAt(-1, 1));
+        Exception exception = assertThrows(InvalidMazeException.class, () -> maze.getValueAt(-1, 1));
         assertEquals("Value out of boundaries. x should be -1 > x > 3 and y should be -1 > y > 3", exception.getMessage());
     }
 
@@ -30,7 +30,7 @@ public class MazeTest {
     public void shouldThrowExceptionIfXcoordinateIsGreaterThanMazeWidth() {
         int[][] newMaze = {{2, 0, 0}, {0, 0, 0}, {1, 3, 0}};
         Maze maze = new Maze(newMaze);
-        Exception exception = assertThrows(RuntimeException.class, () -> maze.getValueAt(16, 1));
+        Exception exception = assertThrows(InvalidMazeException.class, () -> maze.getValueAt(16, 1));
         assertEquals("Value out of boundaries. x should be -1 > x > 3 and y should be -1 > y > 3", exception.getMessage());
     }
 
@@ -39,7 +39,7 @@ public class MazeTest {
     public void shouldThrowExceptionIfYcoordinateIsLessThanZero() {
         int[][] newMaze = {{2, 0, 0}, {0, 0, 0}, {1, 3, 0}};
         Maze maze = new Maze(newMaze);
-        Exception exception = assertThrows(RuntimeException.class, () -> maze.getValueAt(1, -2));
+        Exception exception = assertThrows(InvalidMazeException.class, () -> maze.getValueAt(1, -2));
         assertEquals("Value out of boundaries. x should be -1 > x > 3 and y should be -1 > y > 3", exception.getMessage());
     }
 
@@ -48,7 +48,7 @@ public class MazeTest {
     public void shouldThrowExceptionIfYcoordinateIsGreaterThanMazeHeight() {
         int[][] newMaze = {{2, 0, 0}, {0, 0, 0}, {1, 3, 0}};
         Maze maze = new Maze(newMaze);
-        Exception exception = assertThrows(RuntimeException.class, () -> maze.getValueAt(1, 3));
+        Exception exception = assertThrows(InvalidMazeException.class, () -> maze.getValueAt(1, 3));
         assertEquals("Value out of boundaries. x should be -1 > x > 3 and y should be -1 > y > 3", exception.getMessage());
     }
 
@@ -72,32 +72,32 @@ public class MazeTest {
     @Test
     public void shouldThrowExceptionIfNoOfEntryPointIsMoreThan1() {
         int[][] newMaze = {{1, 0, 2}, {0, 2, 0}, {1, 1, 3}};
-        Exception exception = assertThrows(RuntimeException.class, () -> new Maze(newMaze));
-        assertEquals("the number of entry points is incorrect :2",exception.getMessage());
+        Exception exception = assertThrows(InvalidMazeException.class, () -> new Maze(newMaze));
+        assertEquals("the number of entry points is incorrect :2", exception.getMessage());
     }
 
     @DisplayName("should throw Exception if number of entry point is 0")
     @Test
     public void shouldThrowExceptionIfNoOfEntryPointIsZero() {
         int[][] newMaze = {{1, 0, 0}, {0, 0, 0}, {1, 1, 3}};
-        Exception exception = assertThrows(RuntimeException.class, () -> new Maze(newMaze));
-        assertEquals("the number of entry points is incorrect :0",exception.getMessage());
+        Exception exception = assertThrows(InvalidMazeException.class, () -> new Maze(newMaze));
+        assertEquals("the number of entry points is incorrect :0", exception.getMessage());
     }
 
     @DisplayName("should throw Exception if number of exit point is more than 1")
     @Test
     public void shouldThrowExceptionIfNoOfExitPointIsMoreThan1() {
         int[][] newMaze = {{0, 0, 3}, {0, 3, 0}, {2, 1, 3}};
-        Exception exception = assertThrows(RuntimeException.class, () -> new Maze(newMaze));
-        assertEquals("the number of exit points is incorrect :3",exception.getMessage());
+        Exception exception = assertThrows(InvalidMazeException.class, () -> new Maze(newMaze));
+        assertEquals("the number of exit points is incorrect :3", exception.getMessage());
     }
 
     @DisplayName("should throw Exception if number of exit point is zero")
     @Test
     public void shouldThrowExceptionIfNoOfExitPointIsZero() {
         int[][] newMaze = {{0, 0, 1}, {0, 1, 0}, {2, 1, 0}};
-        Exception exception = assertThrows(RuntimeException.class, () -> new Maze(newMaze));
-        assertEquals("the number of exit points is incorrect :0",exception.getMessage());
+        Exception exception = assertThrows(InvalidMazeException.class, () -> new Maze(newMaze));
+        assertEquals("the number of exit points is incorrect :0", exception.getMessage());
     }
 
     /*
@@ -110,8 +110,8 @@ public class MazeTest {
     public void shouldGetEntryPointCoordinate() {
         int[][] newMaze = {{1, 0, 0}, {0, 0, 2}, {1, 1, 3}};
         Maze maze = new Maze(newMaze);
-        assertEquals(2,maze.getEntryPoint().getX());
-        assertEquals(1,maze.getEntryPoint().getY());
+        assertEquals(2, maze.getEntryPoint().getX());
+        assertEquals(1, maze.getEntryPoint().getY());
     }
 
 }

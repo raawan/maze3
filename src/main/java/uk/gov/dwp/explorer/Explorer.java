@@ -1,5 +1,7 @@
 package uk.gov.dwp.explorer;
 
+import static uk.gov.dwp.maze.Maze.WALL;
+
 import uk.gov.dwp.common.Coordinate;
 import uk.gov.dwp.common.DIRECTION;
 import uk.gov.dwp.common.Location;
@@ -25,11 +27,6 @@ public class Explorer {
 
     public List<Coordinate> getHaveBeen() {
         return haveBeen;
-    }
-
-    public void setCurrentLocation(final Location currentLocation) {
-        //ToDo: throw excpetion if the location is WALL
-        this.currentLocation = currentLocation;
     }
 
     public Explorer(final Maze maze) {
@@ -133,10 +130,14 @@ public class Explorer {
         if (isOutsideMazeBorder(x, y)) {
             return false;
         }
-        if (maze.getMaze()[y][x] == Maze.WALL || maze.getMaze()[y][x] == Maze.ENTRY) {
+        if (maze.getMaze()[y][x] == WALL || maze.getMaze()[y][x] == Maze.ENTRY) {
             return false;
         }
         return true;
+    }
+
+    private boolean isNotWall(final Location currentLocation) {
+        return !(this.maze.getMaze()[currentLocation.getCoordinate().getY()][currentLocation.getCoordinate().getX()] == WALL);
     }
 
     private boolean isOutsideMazeBorder(final int x, final int y) {

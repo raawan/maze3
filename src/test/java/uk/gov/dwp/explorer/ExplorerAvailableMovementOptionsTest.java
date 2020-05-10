@@ -2,6 +2,7 @@ package uk.gov.dwp.explorer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static uk.gov.dwp.explorer.ExplorerHelper.getExplorerWithNewEntryLocation;
 
 import uk.gov.dwp.common.Coordinate;
 import uk.gov.dwp.common.DIRECTION;
@@ -22,22 +23,30 @@ import org.junit.jupiter.api.Test;
 */
 public class ExplorerAvailableMovementOptionsTest {
 
+    public static final int[][] NEW_MAZE = new int[][]{
+            {0, 0, 0, 1, 0, 0},
+            {0, 1, 3, 0, 1, 0},
+            {0, 1, 1, 0, 1, 0},
+            {0, 0, 2, 1, 0, 0},
+            {0, 0, 0, 1, 0, 1},
+            {1, 0, 1, 0, 1, 1}
+    };
+
     /*
-      MAZE :
-        5->  1 0 1 0 1 1
-        4->  0 0 0 1 0 1
-        3->  0 0 2 1 0 0
-        2->  0 1 1 0 1 0
-        1->  0 1 3 0 1 0
-        0->  0 0 0 1 0 0
-             -----------
-             0 1 2 3 4 5
-    */
+              MAZE :
+                5->  1 0 1 0 1 1
+                4->  0 0 0 1 0 1
+                3->  0 0 2 1 0 0
+                2->  0 1 1 0 1 0
+                1->  0 1 3 0 1 0
+                0->  0 0 0 1 0 0
+                     -----------
+                     0 1 2 3 4 5
+            */
     @Test
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_1() {
         //Given
-        Explorer explorer = getExplorer();
-        explorer.setCurrentLocation(new Location(DIRECTION.S, new Coordinate(4, 3)));
+        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, new Coordinate(4, 3)));
         final List<Location> expectedAvailableMovementOptions = new ArrayList<>();
         expectedAvailableMovementOptions.add(new Location(explorer.getCurrentLocation().getDirection(), new Coordinate(4, 4)));
         expectedAvailableMovementOptions.add(new Location(explorer.getCurrentLocation().getDirection(), new Coordinate(5, 3)));
@@ -64,8 +73,7 @@ public class ExplorerAvailableMovementOptionsTest {
     @Test
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_2() {
         //Given
-        Explorer explorer = getExplorer();
-        explorer.setCurrentLocation(new Location(DIRECTION.S, new Coordinate(0, 3)));
+        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, new Coordinate(0, 3)));
         final List<Location> expectedAvailableMovementOptions = new ArrayList<>();
         expectedAvailableMovementOptions.add(new Location(explorer.getCurrentLocation().getDirection(), new Coordinate(1, 3)));
         expectedAvailableMovementOptions.add(new Location(explorer.getCurrentLocation().getDirection(), new Coordinate(0, 2)));
@@ -93,8 +101,7 @@ public class ExplorerAvailableMovementOptionsTest {
     @Test
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_3() {
         //Given
-        Explorer explorer = getExplorer();
-        explorer.setCurrentLocation(new Location(DIRECTION.S, new Coordinate(5, 0)));
+        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, new Coordinate(5, 0)));
         final List<Location> expectedAvailableMovementOptions = new ArrayList<>();
         expectedAvailableMovementOptions.add(new Location(explorer.getCurrentLocation().getDirection(), new Coordinate(4, 0)));
         expectedAvailableMovementOptions.add(new Location(explorer.getCurrentLocation().getDirection(), new Coordinate(5, 1)));
@@ -121,8 +128,7 @@ public class ExplorerAvailableMovementOptionsTest {
     @Test
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_4() {
         //Given
-        Explorer explorer = getExplorer();
-        explorer.setCurrentLocation(new Location(DIRECTION.S, new Coordinate(4, 4)));
+        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, new Coordinate(4, 4)));
         final List<Location> expectedAvailableMovementOptions = new ArrayList<>();
         expectedAvailableMovementOptions.add(new Location(explorer.getCurrentLocation().getDirection(), new Coordinate(4, 3)));
 
@@ -148,8 +154,7 @@ public class ExplorerAvailableMovementOptionsTest {
     @Test
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_5() {
         //Given
-        Explorer explorer = getExplorer();
-        explorer.setCurrentLocation(new Location(DIRECTION.S, new Coordinate(3, 5)));
+        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, new Coordinate(3, 5)));
         final List<Location> expectedAvailableMovementOptions = new ArrayList<>();
 
         //When
@@ -161,19 +166,6 @@ public class ExplorerAvailableMovementOptionsTest {
 
     private boolean listEqualsIgnoreOrder(List<Location> list1, List<Location> list2) {
         return new HashSet<>(list1).equals(new HashSet<>(list2));
-    }
-
-    private Explorer getExplorer() {
-        int[][] newMaze = {
-                {0, 0, 0, 1, 0, 0},
-                {0, 1, 3, 0, 1, 0},
-                {0, 1, 1, 0, 1, 0},
-                {0, 0, 2, 1, 0, 0},
-                {0, 0, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1, 1}
-        };
-        Maze maze = new Maze(newMaze);
-        return new Explorer(maze);
     }
 
 }

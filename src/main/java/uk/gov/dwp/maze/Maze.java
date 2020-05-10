@@ -28,7 +28,7 @@ public class Maze {
         int height = maze.length;
         int width = maze[0].length;
         if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
-            throw new RuntimeException("Value out of boundaries. x should be -1 > x > " + width + " and y should be -1 > y > " + height);
+            throw new InvalidMazeException("Value out of boundaries. x should be -1 > x > " + width + " and y should be -1 > y > " + height);
         }
         return maze[x][y];
     }
@@ -65,8 +65,7 @@ public class Maze {
 
     private void validateLength(final int[][] maze) {
         if (maze.length == 0) {
-            //toDo: custom exceptions
-            throw new RuntimeException("Length of maze should be greater than zero");
+            throw new InvalidMazeException("Length of maze should be greater than zero");
         }
     }
 
@@ -76,7 +75,7 @@ public class Maze {
                 .filter(val -> val == ENTRY)
                 .count();
         if (noOfEntryPoints == 0 || noOfEntryPoints > 1) {
-            throw new RuntimeException("the number of entry points is incorrect :" + noOfEntryPoints);
+            throw new InvalidMazeException("the number of entry points is incorrect :" + noOfEntryPoints);
         }
     }
 
@@ -86,7 +85,7 @@ public class Maze {
                 .filter(val -> val == EXIT)
                 .count();
         if (noOfExitPoints == 0 || noOfExitPoints > 1) {
-            throw new RuntimeException("the number of exit points is incorrect :" + noOfExitPoints);
+            throw new InvalidMazeException("the number of exit points is incorrect :" + noOfExitPoints);
         }
     }
 }
