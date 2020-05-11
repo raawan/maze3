@@ -1,7 +1,7 @@
 package uk.gov.dwp.explorer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static uk.gov.dwp.explorer.ExplorerHelper.getExplorerWithNewEntryLocation;
+import static uk.gov.dwp.explorer.helper.ExplorerHelper.getExplorerWithNewEntryLocation;
 
 import uk.gov.dwp.common.Coordinate;
 import uk.gov.dwp.common.DIRECTION;

@@ -2,9 +2,8 @@ package uk.gov.dwp.explorer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static uk.gov.dwp.explorer.ExplorerHelper.getExplorerWithNewEntryLocation;
+import static uk.gov.dwp.explorer.helper.ExplorerHelper.getExplorerWithNewEntryLocation;
 
-import uk.gov.dwp.common.Coordinate;
 import uk.gov.dwp.common.DIRECTION;
 import uk.gov.dwp.common.Location;
 import uk.gov.dwp.maze.Maze;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -44,6 +44,7 @@ public class ExplorerAvailableMovementOptionsTest {
                      0 1 2 3 4 5
             */
     @Test
+    @DisplayName("should return available movement options to explorer from his current position - test 1")
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_1() {
         //Given
         final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, 4,3));
@@ -71,6 +72,7 @@ public class ExplorerAvailableMovementOptionsTest {
              0 1 2 3 4 5
     */
     @Test
+    @DisplayName("should return available movement options to explorer from his current position - test 2")
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_2() {
         //Given
         final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S,0,3));
@@ -99,6 +101,7 @@ public class ExplorerAvailableMovementOptionsTest {
            0 1 2 3 4 5
   */
     @Test
+    @DisplayName("should return available movement options to explorer from his current position - test 3")
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_3() {
         //Given
         final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, 5,0));
@@ -126,6 +129,7 @@ public class ExplorerAvailableMovementOptionsTest {
            0 1 2 3 4 5
     */
     @Test
+    @DisplayName("should return available movement options to explorer from his current position - test 4")
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_4() {
         //Given
         final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, 4,4));
@@ -152,6 +156,7 @@ public class ExplorerAvailableMovementOptionsTest {
            0 1 2 3 4 5
     */
     @Test
+    @DisplayName("should return available movement options to explorer from his current position - test 5")
     public void shouldReturnAvailableMovementOptionsGivenCorrectLocationInMaze_5() {
         //Given
         final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S,3,5));

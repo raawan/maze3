@@ -36,7 +36,6 @@ public class Explorer {
         haveBeen.add(currentLocation.getCoordinate());
     }
 
-
     public void moveForward() {
         int x = currentLocation.getCoordinate().getX();
         int y = currentLocation.getCoordinate().getY();
@@ -134,10 +133,6 @@ public class Explorer {
             return false;
         }
         return true;
-    }
-
-    private boolean isNotWall(final Location currentLocation) {
-        return !(this.maze.getMaze()[currentLocation.getCoordinate().getY()][currentLocation.getCoordinate().getX()] == WALL);
     }
 
     private boolean isOutsideMazeBorder(final int x, final int y) {

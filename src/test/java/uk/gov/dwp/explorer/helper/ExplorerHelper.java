@@ -1,8 +1,9 @@
-package uk.gov.dwp.explorer;
+package uk.gov.dwp.explorer.helper;
 
 import uk.gov.dwp.common.Coordinate;
 import uk.gov.dwp.common.DIRECTION;
 import uk.gov.dwp.common.Location;
+import uk.gov.dwp.explorer.Explorer;
 import uk.gov.dwp.maze.Maze;
 
 import java.util.HashMap;
@@ -23,15 +24,6 @@ public class ExplorerHelper {
     public static int[][] changeStateOfSpecificCoordinate(int[][] maze, int x, int y, int newState) {
         maze[y][x] = newState;
         return maze;
-    }
-
-    public static void printMaze(int[][] maze) {
-        for (int i = maze.length - 1; i >= 0; i--) {
-            for (int j = 0; j < maze[0].length; j++) {
-                System.out.printf(maze[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 
     private static void changeExplorerDirection(Explorer explorer, DIRECTION currentDirection, DIRECTION newDirection) {
