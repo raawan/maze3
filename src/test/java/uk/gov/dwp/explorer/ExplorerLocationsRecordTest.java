@@ -8,6 +8,7 @@ import uk.gov.dwp.maze.Maze;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,13 +45,13 @@ public class ExplorerLocationsRecordTest {
         explorer.moveForward();
 
         //Then
-        List<Coordinate> expectedHaveBeenLocations = new ArrayList<>();
+        Set<Coordinate> expectedHaveBeenLocations = new HashSet<>();
         expectedHaveBeenLocations.add(new Coordinate(2, 4));
         expectedHaveBeenLocations.add(new Coordinate(2, 5));
         expectedHaveBeenLocations.add(new Coordinate(1, 5));
-        final List<Coordinate> actualHaveBeenLocations = explorer.getHaveBeen();
+        final Set<Coordinate> actualHaveBeenLocations = explorer.getHaveBeen();
 
-        assertTrue(listEqualsIgnoreOrder(expectedHaveBeenLocations, actualHaveBeenLocations));
+        assertTrue(expectedHaveBeenLocations.equals(actualHaveBeenLocations));
     }
 
     /*
@@ -83,16 +84,16 @@ public class ExplorerLocationsRecordTest {
 
 
         //Then
-        List<Coordinate> expectedHaveBeenLocations = new ArrayList<>();
+        Set<Coordinate> expectedHaveBeenLocations = new HashSet<>();
         expectedHaveBeenLocations.add(new Coordinate(2, 4));
         expectedHaveBeenLocations.add(new Coordinate(2, 5));
         expectedHaveBeenLocations.add(new Coordinate(1, 5));
         expectedHaveBeenLocations.add(new Coordinate(1, 4));
         expectedHaveBeenLocations.add(new Coordinate(1, 3));
         expectedHaveBeenLocations.add(new Coordinate(0, 3));
-        final List<Coordinate> actualHaveBeenLocations = explorer.getHaveBeen();
+        final Set<Coordinate> actualHaveBeenLocations = explorer.getHaveBeen();
 
-        assertTrue(listEqualsIgnoreOrder(expectedHaveBeenLocations, actualHaveBeenLocations));
+        assertTrue(expectedHaveBeenLocations.equals(actualHaveBeenLocations));
     }
 
     private Explorer getExplorer() {
@@ -108,7 +109,4 @@ public class ExplorerLocationsRecordTest {
         return new Explorer(maze);
     }
 
-    private boolean listEqualsIgnoreOrder(List<Coordinate> list1, List<Coordinate> list2) {
-        return new HashSet<>(list1).equals(new HashSet<>(list2));
-    }
 }

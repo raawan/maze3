@@ -8,13 +8,15 @@ import uk.gov.dwp.common.Location;
 import uk.gov.dwp.maze.Maze;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Explorer {
 
     private final Maze maze;
-    private final List<Coordinate> haveBeen;
+    private final Set<Coordinate> haveBeen;
     private Location currentLocation;
 
     public Location getCurrentLocation() {
@@ -25,14 +27,14 @@ public class Explorer {
         return maze;
     }
 
-    public List<Coordinate> getHaveBeen() {
+    public Set<Coordinate> getHaveBeen() {
         return haveBeen;
     }
 
     public Explorer(final Maze maze) {
         this.maze = maze;
         currentLocation = new Location(DIRECTION.N, maze.getEntryPoint());
-        this.haveBeen = new ArrayList<>();
+        this.haveBeen = new HashSet<>();
         haveBeen.add(currentLocation.getCoordinate());
     }
 
