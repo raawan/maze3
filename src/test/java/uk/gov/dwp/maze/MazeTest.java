@@ -13,7 +13,7 @@ public class MazeTest {
     public void shouldReturnTheCorrectValueAtCoordinate() {
         int[][] newMaze = {{2, 0, 0}, {0, 0, 0}, {1, 3, 0}};
         Maze maze = new Maze(newMaze);
-        assertEquals(maze.getMaze()[1][1], maze.getValueAt(1, 1));
+        assertEquals(0, maze.getValueAt(1, 1));
     }
 
     @DisplayName("should throw exception if x coordinate is less than 0")

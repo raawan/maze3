@@ -29,6 +29,7 @@ public class ExplorerMoveForwardTest {
             {1, 0, 2, 1, 0, 1},
             {1, 0, 0, 0, 1, 1}
     };
+    public static final Maze MAZE = new Maze(NEW_MAZE);
 
     /*
               MAZE :
@@ -51,7 +52,7 @@ public class ExplorerMoveForwardTest {
             String direction, int currentLocationX, int currentLocationY,
             int expectedLocationX, int expectedLocationY) {
         //Given
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.valueOf(direction), currentLocationX,currentLocationY));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.valueOf(direction), currentLocationX,currentLocationY),MAZE.getEntryPoint());
 
         //When
         explorer.moveForward();
@@ -74,10 +75,10 @@ public class ExplorerMoveForwardTest {
              0 1 2 3 4 5
     */
     @Test
-    @DisplayName("should move forward if WALL is available in front of explorer")
+    @DisplayName("should not move forward if WALL is available in front of explorer")
     public void shouldNotMoveForwardIfWallIsAvailableInFrontOfExplorer() {
         //Given
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.N, 3,2));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.N, 3,2),MAZE.getEntryPoint());
 
         //When
         explorer.moveForward();
@@ -88,5 +89,7 @@ public class ExplorerMoveForwardTest {
         assertEquals(2, coordinate.getY());
 
     }
+
+    //add test to move forward when there is an exit
 
 }

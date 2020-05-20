@@ -26,6 +26,7 @@ public class ExplorerInFrontOfTest {
             {0, 1, 1, 0, 1}, //2nd row
             {0, 0, 2, 1, 0}  //3rd row
     };
+    public static final Maze MAZE = new Maze(NEW_MAZE);
 
     /*
             MAZE :
@@ -48,7 +49,7 @@ public class ExplorerInFrontOfTest {
             String direction, int currentLocationX, int currentLocationY,
             int expectedStateInFrontOfExplorer
     ) {
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.valueOf(direction), currentLocationX,currentLocationY));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.valueOf(direction), currentLocationX,currentLocationY),MAZE.getEntryPoint());
         assertEquals(expectedStateInFrontOfExplorer, explorer.inFrontOfMe());
     }
 
@@ -64,7 +65,7 @@ public class ExplorerInFrontOfTest {
     @DisplayName("should return invalid state given explorer facing north and is on top edge of maze")
     @Test
     public void shouldReturnInvalidStateGivenExplorerFacingNorthAndIsOnTopEdgeOfMaze() {
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.N, 3,3));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.N, 3,3),MAZE.getEntryPoint());
         assertEquals(-1, explorer.inFrontOfMe());
     }
 
@@ -80,7 +81,7 @@ public class ExplorerInFrontOfTest {
     @DisplayName("should return invalid state given explorer facing south and is on bottom edge of maze")
     @Test
     public void shouldReturnInvalidStateGivenExplorerFacingSouthAndIsOnBottomEdgeOfMaze() {
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.S, 3,0));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.S, 3,0),MAZE.getEntryPoint());
         assertEquals(-1, explorer.inFrontOfMe());
     }
 
@@ -96,7 +97,7 @@ public class ExplorerInFrontOfTest {
     @DisplayName("should return invalid state given explorer facing east and is on right edge of maze")
     @Test
     public void shouldReturnInvalidStateGivenExplorerFacingEastAndIsOnRightEdgeOfMaze() {
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.E, 4,2));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.E, 4,2),MAZE.getEntryPoint());
         assertEquals(-1, explorer.inFrontOfMe());
     }
 
@@ -112,7 +113,7 @@ public class ExplorerInFrontOfTest {
     @DisplayName("should return invalid state given explorer facing west and is on top left edge of maze")
     @Test
     public void shouldReturnInvalidStateGivenExplorerFacingWestAndIsOnLeftEdgeOfMaze() {
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.W, 0,3));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.W, 0,3),MAZE.getEntryPoint());
         assertEquals(-1, explorer.inFrontOfMe());
     }
 

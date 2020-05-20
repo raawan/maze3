@@ -19,23 +19,19 @@ public class Explorer {
     private final Set<Coordinate> haveBeen;
     private Location currentLocation;
 
-    public Location getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public Maze getMaze() {
-        return maze;
-    }
-
-    public Set<Coordinate> getHaveBeen() {
-        return haveBeen;
-    }
-
     public Explorer(final Maze maze) {
         this.maze = maze;
         currentLocation = new Location(DIRECTION.N, maze.getEntryPoint());
         this.haveBeen = new HashSet<>();
         haveBeen.add(currentLocation.getCoordinate());
+    }
+
+    public Location getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public Set<Coordinate> getHaveBeen() {
+        return haveBeen;
     }
 
     public void moveForward() {
@@ -120,30 +116,21 @@ public class Explorer {
     }
 
     private int determineInFrontOfMe(final int x, final int y) {
-        if (isOutsideMazeBorder(x, y)) {
+        if (maze.isOutsideMazeBorder(x, y)) {
             return -1;
         } else {
-            return maze.getMaze()[y][x];
+            return maze.getValueAt(x, y);
         }
     }
 
     private boolean isValidMove(final int x, final int y) {
-        if (isOutsideMazeBorder(x, y)) {
+        if (maze.isOutsideMazeBorder(x, y)) {
             return false;
         }
-        if (maze.getMaze()[y][x] == WALL || maze.getMaze()[y][x] == Maze.ENTRY) {
+        if (maze.getValueAt(x, y) == WALL || maze.getValueAt(x, y) == Maze.ENTRY) {
             return false;
         }
         return true;
-    }
-
-    private boolean isOutsideMazeBorder(final int x, final int y) {
-        int height = maze.getMaze().length;
-        int width = maze.getMaze()[0].length;
-        if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
-            return true;
-        }
-        return false;
     }
 
     private List<Location> availableLocationsToMove(int x, int y) {

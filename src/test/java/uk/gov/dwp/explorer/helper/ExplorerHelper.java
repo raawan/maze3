@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class ExplorerHelper {
 
-    public static Explorer getExplorerWithNewEntryLocation(Maze maze, Location newEntry) {
+    public static Explorer getExplorerWithNewEntryLocation(int[][] maze, Location newEntry, Coordinate currentEntryPoint) {
 
-        final Coordinate entryPoint = maze.getEntryPoint();
-        changeStateOfSpecificCoordinate(maze.getMaze(), entryPoint.getX(), entryPoint.getY(), Maze.SPACE);
-        changeStateOfSpecificCoordinate(maze.getMaze(), newEntry.getCoordinate().getX(), newEntry.getCoordinate().getY(), Maze.ENTRY);
-        final Explorer explorer = new Explorer(maze);
+        final Coordinate entryPoint = currentEntryPoint;
+        changeStateOfSpecificCoordinate(maze, entryPoint.getX(), entryPoint.getY(), Maze.SPACE);
+        changeStateOfSpecificCoordinate(maze, newEntry.getCoordinate().getX(), newEntry.getCoordinate().getY(), Maze.ENTRY);
+        final Explorer explorer = new Explorer(new Maze(maze));
         changeExplorerDirection(explorer, explorer.getCurrentLocation().getDirection(), newEntry.getDirection());
         return explorer;
     }

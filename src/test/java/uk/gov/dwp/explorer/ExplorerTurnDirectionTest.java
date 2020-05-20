@@ -23,6 +23,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class ExplorerTurnDirectionTest {
 
     public static final int[][] NEW_MAZE = {{1, 0, 0}, {0, 0, 2}, {1, 1, 3}};
+    public static final Maze MAZE = new Maze(NEW_MAZE);
 
     @Test
     @DisplayName("should return correct starting DIRECTION and CO-ORDINATE of explorer")
@@ -46,7 +47,7 @@ public class ExplorerTurnDirectionTest {
     public void shouldReturnCorrectDirectionOnTurnLeft(String currentDirection,
                                                        String expectedDirectionAfterTurningLeft) {
         //Given
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.valueOf(currentDirection), getExplorer().getCurrentLocation().getCoordinate()));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.valueOf(currentDirection), getExplorer().getCurrentLocation().getCoordinate()),MAZE.getEntryPoint());
         assertEquals(DIRECTION.valueOf(currentDirection), explorer.getCurrentLocation().getDirection());
         //When
         explorer.turnLeft();
@@ -66,7 +67,7 @@ public class ExplorerTurnDirectionTest {
     public void shouldReturnCorrectDirectionOnTurnRight(String currentDirection,
                                                         String expectedDirectionAfterTurningLeft) {
         //Given
-        final Explorer explorer = getExplorerWithNewEntryLocation(new Maze(NEW_MAZE), new Location(DIRECTION.valueOf(currentDirection), getExplorer().getCurrentLocation().getCoordinate()));
+        final Explorer explorer = getExplorerWithNewEntryLocation(NEW_MAZE, new Location(DIRECTION.valueOf(currentDirection), getExplorer().getCurrentLocation().getCoordinate()),MAZE.getEntryPoint());
         assertEquals(DIRECTION.valueOf(currentDirection), explorer.getCurrentLocation().getDirection());
         //When
         explorer.turnRight();
@@ -79,4 +80,6 @@ public class ExplorerTurnDirectionTest {
         Maze maze = new Maze(newMaze);
         return new Explorer(maze);
     }
+
+    //test wioth multiple turns
 }

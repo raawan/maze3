@@ -20,17 +20,13 @@ public class Maze {
         this.maze = maze;
     }
 
-    public int[][] getMaze() {
-        return maze;
-    }
-
-    int getValueAt(int x, int y) {
+    public int getValueAt(int x, int y) {
         int height = maze.length;
         int width = maze[0].length;
         if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
             throw new InvalidMazeException("Value out of boundaries. x should be -1 > x > " + width + " and y should be -1 > y > " + height);
         }
-        return maze[x][y];
+        return maze[y][x];
     }
 
     int getNumberOfWalls() {
@@ -61,6 +57,23 @@ public class Maze {
             }
         }
         return new Coordinate(x, y);
+    }
+
+    public boolean isOutsideMazeBorder(final int x, final int y) {
+        int height = getHeight();
+        int width = getWidth();
+        if (x < 0 || x > width - 1 || y < 0 || y > height - 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private int getWidth() {
+        return maze[0].length;
+    }
+
+    private int getHeight() {
+        return maze.length;
     }
 
     private void validateLength(final int[][] maze) {
